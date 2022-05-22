@@ -122,7 +122,17 @@ public class Client extends JFrame implements ActionListener, Thread.UncaughtExc
 
     }
 //codewars, hackerrank, leetcode, codegame
-
+    private void wrtMsgToLogFile(String msg, String username) {
+    try (FileWriter out = new FileWriter("log.txt", true)) {
+        out.write(username + ": " + msg + "\n");
+        out.flush();
+    } catch (IOException e) {
+        if (!shownIoErrors) {
+            shownIoErrors = true;
+            showException(Thread.currentThread(), e);
+        }
+    }
+    }
 
 
     private void putLog(String msg) {
